@@ -42,9 +42,10 @@ export class Component extends LitElement {
   }
 
   render() {
-    return html`<div class="container" @click=${this.onClick}>
-      <button>${this.label}</button>
+    return html`<div class="container">
+      <button @click=${this.onClick}>${this.label}</button>
     </div>`;
   }
 }
+
 customElements.define('my-button', Component);
