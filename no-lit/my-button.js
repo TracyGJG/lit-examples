@@ -54,9 +54,7 @@ class Component extends HTMLElement {
 
     this.onClick = () => {};
     this.$button = this._shadowRoot.querySelector('button');
-    this.$button.addEventListener('click', evt => {
-      this.onClick(evt);
-    });
+    this.$button.addEventListener('click', evt => this.onClick(evt));
   }
 
   get label() {
