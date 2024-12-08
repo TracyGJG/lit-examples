@@ -1,26 +1,19 @@
-# lit-examples
+# Lit Examples
 
-Three simple example [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), one using the [Lit library](https://lit.dev/).
+Four example [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), two using the [Lit library](https://lit.dev/) and two using vanilla JS.
 
-## Example One: Vanilla Web Component without a shadow-DOM (no-shadow)
+Each pair of implmentations have two varieties: One using a Shadow DOM and the other using a light DOM.
 
-This example comprises of two files:
+The index.html file is virtually identical for all examples. They only differ in the use of slots, which are not supported outside a Shadow DOM.
 
-- index.html is the sampler that exercises the component.
-- my-button.js is a basic web component.
+- `native-light`: Vanilla JS using the light DOM
 
-The _my-button_ component extends the HTMLElement DOM element. It is constructed using an HTML template that includes the DOM elements for building the component and a _style_ element containing CSS, defined in a separate template literal.
+- `native-shadow`: Vanilla JS using the Shadow DOM
 
-## Example Two: Vanilla Web Component with Shadow-DOM (no-lit)
+- `lit-light`: Lit JS using the light DOM
 
-The second example is similar to the first but employs a shadow DOM.
-
-## Example Three: Web Component using Lit (with-lit)
-
-The third example imports the _html, css_ & _LitElement_ features of the lit library.
+- `lit-shadow`: Lit JS using the Shadow DOM
 
 _LiteElement_ is the basic web component class we will be extending and customising for our needs. _html_ and _css_ are [tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates), used to register the html template and styling of the custom component.
-
-The index.html file is virtually identical for both examples, only differing in the use of _script_ tags in the head.
 
 ---
