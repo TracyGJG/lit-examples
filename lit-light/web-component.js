@@ -1,7 +1,7 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, css } from "lit";
 
 class WebComponent extends LitElement {
-  static styles = /*css*/ `
+  static styles = css`
     h1 {
       color: red;
     }
@@ -31,16 +31,15 @@ class WebComponent extends LitElement {
   }
 
   render() {
-    return html`<style>
-        ${WebComponent.styles}
-      </style>
-      <div>
-        <h1><slot>unnamedSlot</slot></h1>
-        <h2 class="slot"><slot name="namedSlot">namedSlot</slot></h2>
-        <h2 class="attr">${this.attrProp}</h2>
-        <button @click=${this.#internalCallback}>Internal</button>
-        <button @click=${this.#toggleCallback}>Toggle</button>
-      </div>`;
+    document.adoptedStyleSheets = [WebComponent.styles.styleSheet];
+
+    return html` <div>
+      <h1><slot>unnamedSlot</slot></h1>
+      <h2 class="slot"><slot name="namedSlot">namedSlot</slot></h2>
+      <h2 class="attr">${this.attrProp}</h2>
+      <button @click=${this.#internalCallback}>Internal</button>
+      <button @click=${this.#toggleCallback}>Toggle</button>
+    </div>`;
   }
 
   #internalCallback(evt) {
