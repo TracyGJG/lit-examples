@@ -1,21 +1,24 @@
-const styling = /*css*/ `
+const WebComponentSytlesheet = () => {
+  const StyleSheet = new CSSStyleSheet();
+  StyleSheet.replaceSync(/*css*/ `
     h1 {
         color: red;
     }
-    
+
     h2.slot {
         color: orange;
     }
-    
+
     h2.attr {
         color: green;
     }
-`;
+  `);
+  return StyleSheet;
+};
 
-const createTemplate = (attr) => {
+const WebComponentTemplate = (attr) => {
   const template = document.createElement("template");
   template.innerHTML = /*html*/ `
-    <style>${styling}</style>
     <div>
         <h1><slot>unnamedSlot</slot></h1>
         <h2 class="slot"><slot name="namedSlot">namedSlot</slot></h2>
@@ -36,7 +39,8 @@ class WebComponent extends HTMLElement {
   constructor() {
     super();
 
-    this.append(createTemplate(this.attrProp));
+    document.adoptedStyleSheets = [WebComponentSytlesheet()];
+    this.append(WebComponentTemplate(this.attrProp));
     this.addEventListener("click", this);
 
     this.#buttons = this.querySelectorAll("button");
@@ -75,6 +79,11 @@ class WebComponent extends HTMLElement {
     }
   }
 
+  buttonClickHandler = (evt) => {
+    alert(`Button One, ${!!this.#internalClickEvent}`);
+    this.#internalClickEvent && this.#internalClickEvent(evt);
+  };
+
   attributeChangedCallback(name, oldVal, newVal) {
     if (ObservedAttributes.includes(name)) {
       if (name === "prop") {
@@ -84,13 +93,14 @@ class WebComponent extends HTMLElement {
   }
 
   connectedCallback() {
-    this.#buttons[0].addEventListener("click", (evt) => {
-      alert(`Button One, ${!!this.#internalClickEvent}`);
-      this.#internalClickEvent && this.#internalClickEvent(evt);
-    });
+    console.log("connectedCallback");
+    this.#buttons[0].addEventListener("click", this.buttonClickHandler);
   }
 
-  disconnectedCallback() {}
+  disconnectedCallback() {
+    console.log("disconnectedCallback");
+    this.#buttons[0].removeEventListener("click", this.buttonClickHandler);
+  }
 }
 
 customElements.define("web-component", WebComponent);

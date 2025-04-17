@@ -1,28 +1,47 @@
+const WebComponentSytlesheet = () => {
+  const StyleSheet = new CSSStyleSheet();
+  StyleSheet.replaceSync(/*css*/ `
+    h1 {
+        color: red;
+    }
+
+    h2.slot {
+        color: orange;
+    }
+
+    h2.attr {
+        color: green;
+    }
+  `);
+  return StyleSheet;
+};
+
+const WebComponentTemplate = (attrProp) => {
+  const template = document.createElement("template");
+  template.innerHTML = /*html*/ `
+    <div>
+        <h1><slot>unnamedSlot</slot></h1>
+        <h2 class="slot"><slot name="namedSlot">namedSlot</slot></h2>
+        <h2 class="attr">${attrProp}</h2>
+        <button>Internal</button>
+        <button>Toggle</button>
+    </div>
+  `;
+  return template.content.cloneNode(true);
+};
+
 class WebComponent extends HTMLElement {
   static ObservedAttributes = ["prop"];
   #buttons = null;
   #attr = null;
   #internalClickEvent;
 
-  static styling = /*css*/ `
-      h1 {
-          color: red;
-      }
-      
-      h2.slot {
-          color: orange;
-      }
-      
-      h2.attr {
-          color: green;
-      }
-  `;
-
   constructor() {
     super();
 
     this.attachShadow({ mode: "open" });
-    this.shadowRoot.appendChild(this.createTemplate());
+    this.shadowRoot.adoptedStyleSheets = [WebComponentSytlesheet()];
+    this.shadowRoot.appendChild(WebComponentTemplate(this.attrProp));
 
     this.shadowRoot.addEventListener("click", this);
     this.#buttons = this.shadowRoot.querySelectorAll("button");
@@ -47,20 +66,6 @@ class WebComponent extends HTMLElement {
 
   static get observedAttributes() {
     return this.ObservedAttributes;
-  }
-
-  createTemplate() {
-    const template = document.createElement("template");
-    template.innerHTML = /*html*/ `
-  <style>${WebComponent.styling}</style>
-  <div>
-      <h1><slot>unnamedSlot</slot></h1>
-      <h2 class="slot"><slot name="namedSlot">namedSlot</slot></h2>
-      <h2 class="attr">${this.attrProp}</h2>
-      <button>Internal</button>
-      <button>Toggle</button>
-  </div>`;
-    return template.content.cloneNode(true);
   }
 
   handleEvent(evt) {
