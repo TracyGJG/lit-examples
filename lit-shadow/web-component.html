@@ -1,22 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../favicon.png" />
     <title>Web Component</title>
-    <script type="importmap">
-      {
-        "imports": {
-          "@lit/reactive-element": "../node_modules/@lit/reactive-element/reactive-element.js",
-          "@lit/reactive-element/": "../node_modules/@lit/reactive-element/",
-          "lit": "../node_modules/lit/index.js",
-          "lit/": "../node_modules/lit/",
-          "lit-element/": "../node_modules/lit-element/",
-          "lit-html": "../node_modules/lit-html/lit-html.js",
-          "lit-html/": "../node_modules/lit-html/"
-        }
-      }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/lit@3.3.3/polyfill-support.min.js"></script>
     <script type="module" src="web-component.js"></script>
   </head>
   <body>
@@ -31,10 +20,10 @@
     <button>Add Handler</button>
 
     <script>
-      const WebComponent = document.querySelector("web-component");
-      const buttons = document.querySelectorAll("button");
+      const WebComponent = document.querySelector('web-component');
+      const buttons = document.querySelectorAll('button');
 
-      buttons[0].addEventListener("click", () => {
+      buttons[0].addEventListener('click', () => {
         if (!WebComponent.eventProp) {
           console.log(`Event Handler Attached`);
           WebComponent.eventProp = (evt) => {

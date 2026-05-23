@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../favicon.png" />
     <title>Web Component</title>
     <script type="module" src="web-component.js"></script>
   </head>
@@ -18,10 +19,10 @@
     <button>Add Handler</button>
 
     <script>
-      const WebComponent = document.querySelector("web-component");
-      const buttons = document.querySelectorAll("button");
+      const WebComponent = document.querySelector('web-component');
+      const buttons = document.querySelectorAll('button');
 
-      buttons[0].addEventListener("click", () => {
+      buttons[0].addEventListener('click', () => {
         if (!WebComponent.eventProp) {
           console.log(`Event Handler Attached`);
           WebComponent.eventProp = (evt) => {
