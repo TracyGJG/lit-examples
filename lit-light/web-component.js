@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, css } from 'lit';
 
 class WebComponent extends LitElement {
   static styles = css`
@@ -26,6 +26,11 @@ class WebComponent extends LitElement {
     this.attrProp = this.attributes.prop.value;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    console.log(this);
+  }
+
   createRenderRoot() {
     return this;
   }
@@ -48,7 +53,7 @@ class WebComponent extends LitElement {
   }
 
   #toggleCallback(evt) {
-    const attrValues = ["Tick", "Tack", "Toe"];
+    const attrValues = ['Tick', 'Tack', 'Toe'];
     this.attrProp =
       attrValues[
         (1 + attrValues.findIndex((attrValue) => attrValue === this.attrProp)) %
@@ -57,4 +62,4 @@ class WebComponent extends LitElement {
   }
 }
 
-customElements.define("web-component", WebComponent);
+customElements.define('web-component', WebComponent);

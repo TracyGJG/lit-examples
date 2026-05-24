@@ -3,18 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="../favicon.png" />
+    <link rel="icon" type="image/png" href="../Lit.png" />
     <title>Web Component</title>
-    <script src="https://cdn.jsdelivr.net/npm/lit@3.3.3/polyfill-support.min.js"></script>
     <script type="module" src="web-component.js"></script>
   </head>
   <body>
-    <h1>Web Componets</h1>
     <h2>Lit Shadow</h2>
     <hr />
     <web-component prop="tick">
-      <span slot="namedSlot">Named Slot</span>
-      <span>Unnamed Slot</span>
+      <div>Unnamed Slot 1</div>
+      <div slot="namedSlot">Named Slot</div>
+      <div>Unnamed Slot 2</div>
     </web-component>
     <hr />
     <button>Add Handler</button>

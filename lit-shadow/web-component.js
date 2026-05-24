@@ -1,4 +1,8 @@
-import { LitElement, html, css } from "lit";
+import {
+  LitElement,
+  html,
+  css,
+} from 'https://cdn.jsdelivr.net/npm/lit@3.3.3/+esm';
 
 class WebComponent extends LitElement {
   #internalClickEvent = null;
@@ -44,7 +48,7 @@ class WebComponent extends LitElement {
   }
 
   #toggleCallback(evt) {
-    const attrValues = ["Tick", "Tack", "Toe"];
+    const attrValues = ['Tick', 'Tack', 'Toe'];
     this.attrProp =
       attrValues[
         (1 + attrValues.findIndex((attrValue) => attrValue === this.attrProp)) %
@@ -53,4 +57,4 @@ class WebComponent extends LitElement {
   }
 }
 
-customElements.define("web-component", WebComponent);
+customElements.define('web-component', WebComponent);

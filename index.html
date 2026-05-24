@@ -5,10 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <title>Web Components</title>
+    <style>
+      body {
+        background-color: #f0f0f0;
+      }
+      main {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 20px;
+        justify-content: center;
+      }
+      iframe {
+        width: 48vh;
+        height: 44vh;
+        border: 1px solid #ccc;
+        background-color: #fff;
+      }
+    </style>
   </head>
   <body>
     <h1>Web Componets</h1>
-    <h2>Various Examples</h2>
+    <!-- <h2>Various Examples</h2>
     <hr />
     <ul>
       <li>
@@ -19,6 +36,25 @@
       </li>
       <li><a href="lit-light/web-component.html">Lit with light DOM</a></li>
       <li><a href="lit-shadow/web-component.html">Lit with Shadow DOM</a></li>
-    </ul>
+    </ul> -->
+
+    <main>
+      <iframe
+        src="./lit-shadow/web-component-ls.html"
+        title="Lit with Shadow DOM"
+      ></iframe>
+      <iframe
+        src="./lit-light/web-component-ll.html"
+        title="Lit with light DOM"
+      ></iframe>
+      <iframe
+        src="./native-shadow/web-component-ns.html"
+        title="Native with Shadow DOM"
+      ></iframe>
+      <iframe
+        src="./native-light/web-component-nl.html"
+        title="Native with light DOM"
+      ></iframe>
+    </main>
   </body>
 </html>

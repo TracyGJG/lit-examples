@@ -19,3 +19,11 @@ The index.html file is virtually identical for all examples. They only differ in
 _LiteElement_ is the basic web component class we will be extending and customising for our needs. _html_ and _css_ are [tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates), used to register the html template and styling of the custom component.
 
 ---
+
+## Web Component features
+
+1. Active attributes
+2. Two-way properties (linked to attributes)
+3. Custom Event emissions
+4. Slots (names and unnamed)
+5. Ligtht- and shadowDOM
