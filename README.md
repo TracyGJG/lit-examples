@@ -8,11 +8,11 @@ Each pair of implmentations have two varieties: One using a Shadow DOM and the o
 
 The index.html file is virtually identical for all examples. They only differ in the use of slots, which are not supported outside a Shadow DOM.
 
-- `native-light`: Vanilla JS using the light DOM
+- `native-light`: Vanilla JS using the light DOM with an pseudo-slot insertion mechanism.
 
 - `native-shadow`: Vanilla JS using the Shadow DOM
 
-- `lit-light`: Lit JS using the light DOM (uses importMaps)
+- `lit-light`: Lit JS using the light DOM (uses importMaps), no slot insertion.
 
 - `lit-shadow`: Lit JS using the Shadow DOM (loaded from a CDN)
 
@@ -27,3 +27,4 @@ _LiteElement_ is the basic web component class we will be extending and customis
 3. Custom Event emissions
 4. Slots (names and unnamed)
 5. Ligtht- and shadowDOM
+6. Pseudo-Slot insertion for native light-DOM only.

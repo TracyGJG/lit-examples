@@ -1,3 +1,5 @@
+import renderLightDom from '../lightDom.js';
+
 const WebComponentSytlesheet = () => {
   const StyleSheet = new CSSStyleSheet();
   StyleSheet.replaceSync(/*css*/ `
@@ -17,7 +19,7 @@ const WebComponentSytlesheet = () => {
 };
 
 const WebComponentTemplate = (attr) => {
-  const template = document.createElement("template");
+  const template = document.createElement('template');
   template.innerHTML = /*html*/ `
     <div>
         <h1><slot>unnamedSlot</slot></h1>
@@ -29,7 +31,7 @@ const WebComponentTemplate = (attr) => {
   return template.content.cloneNode(true);
 };
 
-const ObservedAttributes = ["prop"];
+const ObservedAttributes = ['prop'];
 
 class WebComponent extends HTMLElement {
   #buttons = null;
@@ -38,21 +40,15 @@ class WebComponent extends HTMLElement {
 
   constructor() {
     super();
-
     document.adoptedStyleSheets = [WebComponentSytlesheet()];
-    this.append(WebComponentTemplate(this.attrProp));
-    this.addEventListener("click", this);
-
-    this.#buttons = this.querySelectorAll("button");
-    this.#attr = this.querySelector("h2.attr");
   }
 
   get attrProp() {
-    return this.getAttribute("prop");
+    return this.getAttribute('prop');
   }
 
   set attrProp(value) {
-    this.setAttribute("prop", value);
+    this.setAttribute('prop', value);
   }
 
   get eventProp() {
@@ -68,8 +64,8 @@ class WebComponent extends HTMLElement {
   }
 
   handleEvent(evt) {
-    const attrValues = ["Tick", "Tack", "Toe"];
-    if ("Toggle" === evt.target.textContent) {
+    const attrValues = ['Tick', 'Tack', 'Toe'];
+    if ('Toggle' === evt.target.textContent) {
       this.attrProp =
         attrValues[
           (1 +
@@ -86,21 +82,27 @@ class WebComponent extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (ObservedAttributes.includes(name)) {
-      if (name === "prop") {
+      if (name === 'prop' && this.#attr && null != newVal) {
         this.#attr.textContent = newVal;
       }
     }
   }
 
   connectedCallback() {
-    console.log("connectedCallback");
-    this.#buttons[0].addEventListener("click", this.buttonClickHandler);
+    console.log('connectedCallback');
+
+    this.append(renderLightDom(WebComponentTemplate(this.attrProp), this));
+
+    this.addEventListener('click', this);
+    this.#buttons = this.querySelectorAll('button');
+    this.#attr = this.querySelector('h2.attr');
+    this.#buttons[0].addEventListener('click', this.buttonClickHandler);
   }
 
   disconnectedCallback() {
-    console.log("disconnectedCallback");
-    this.#buttons[0].removeEventListener("click", this.buttonClickHandler);
+    console.log('disconnectedCallback');
+    this.#buttons[0].removeEventListener('click', this.buttonClickHandler);
   }
 }
 
-customElements.define("web-component", WebComponent);
+customElements.define('web-component', WebComponent);

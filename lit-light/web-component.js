@@ -28,7 +28,6 @@ class WebComponent extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    console.log(this);
   }
 
   createRenderRoot() {
